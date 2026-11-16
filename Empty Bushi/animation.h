@@ -108,6 +108,8 @@ public:
 
 	void on_render()
 	{
+		if (frame_list.empty() || idx_frame >= frame_list.size())
+			return;
 		const Frame& frame = frame_list[idx_frame];
 
 		Rect rect_dst;

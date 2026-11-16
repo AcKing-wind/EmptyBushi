@@ -192,7 +192,7 @@ void ResourcesManager::flip_image(IMAGE* src_image, IMAGE* dst_image, int num_h)
             for (int x = x_left; x < x_right; x++)
             {
                 int idx_src = y * w + x;
-                int idx_dst = y * w + x_right - (x - x_left);
+                int idx_dst = y * w + x_right - 1 - (x - x_left);
                 dst_buffer[idx_dst] = src_buffer[idx_src];
             }
         }

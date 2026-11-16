@@ -4,7 +4,7 @@ class StateNode
 {
 public:
 	StateNode() = default;
-	~StateNode() = default;
+	virtual ~StateNode() = default;
 
 	virtual void on_enter() {}
 	virtual void on_update(float delta) {}

@@ -184,13 +184,13 @@ Player::Player()
 	}
 
 	{
-		state_machine.register_state("attack", new PlayerAttackState());
-		state_machine.register_state("dead",   new PlayerDeadState());
-		state_machine.register_state("fall",   new PlayerFallState());
-		state_machine.register_state("idle",   new PlayerIdleState());
-		state_machine.register_state("jump",   new PlayerJumpState());
-		state_machine.register_state("roll",   new PlayerRollState());
-		state_machine.register_state("run",    new PlayerRunState());
+		state_machine.register_state("attack", std::make_unique<PlayerAttackState>());
+		state_machine.register_state("dead", std::make_unique<PlayerDeadState>());
+		state_machine.register_state("fall", std::make_unique<PlayerFallState>());
+		state_machine.register_state("idle", std::make_unique<PlayerIdleState>());
+		state_machine.register_state("jump", std::make_unique<PlayerJumpState>());
+		state_machine.register_state("roll", std::make_unique<PlayerRollState>());
+		state_machine.register_state("run", std::make_unique<PlayerRunState>());
 
 		state_machine.set_entry("idle");
 	}

@@ -44,16 +44,18 @@ public:
 		if (paused) return;
 
 		pass_time += delta;
+
 		if (pass_time >= wait_time)
 		{
-			bool can_shot = (!one_shot || (one_shot && !shotted));
+			bool can_shot = !one_shot || !shotted;
 			shotted = true;
+
 			if (can_shot && on_timeout)
 			{
 				on_timeout();
 			}
-			pass_time -= wait_time;
 
+			pass_time -= wait_time;
 		}
 	}
 

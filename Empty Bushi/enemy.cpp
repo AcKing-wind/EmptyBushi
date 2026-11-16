@@ -241,18 +241,18 @@ Enemy::Enemy()
 	}
 
 	{
-		state_machine.register_state("aim", new EnemyAimState());
-		state_machine.register_state("dash_in_air", new EnemyDashInAirState());
-		state_machine.register_state("dash_on_floor", new EnemyDashOnFloorState());
-		state_machine.register_state("dead", new EnemyDeadState());
-		state_machine.register_state("fall", new EnemyFallState());
-		state_machine.register_state("idle", new EnemyIdleState());
-		state_machine.register_state("jump", new EnemyJumpState());
-		state_machine.register_state("run", new EnemyRunState());
-		state_machine.register_state("squat", new EnemySquatState());
-		state_machine.register_state("throw_barb", new EnemyThrowBarbState());
-		state_machine.register_state("throw_silk", new EnemyThrowSilkState());
-		state_machine.register_state("throw_sword", new EnemyThrowSwordState());
+		state_machine.register_state("aim", std::make_unique<EnemyAimState>());
+		state_machine.register_state("dash_in_air", std::make_unique<EnemyDashInAirState>());
+		state_machine.register_state("dash_on_floor", std::make_unique<EnemyDashOnFloorState>());
+		state_machine.register_state("dead", std::make_unique<EnemyDeadState>());
+		state_machine.register_state("fall", std::make_unique<EnemyFallState>());
+		state_machine.register_state("idle", std::make_unique<EnemyIdleState>());
+		state_machine.register_state("jump", std::make_unique<EnemyJumpState>());
+		state_machine.register_state("run", std::make_unique<EnemyRunState>());
+		state_machine.register_state("squat", std::make_unique<EnemySquatState>());
+		state_machine.register_state("throw_barb", std::make_unique<EnemyThrowBarbState>());
+		state_machine.register_state("throw_silk", std::make_unique<EnemyThrowSilkState>());
+		state_machine.register_state("throw_sword", std::make_unique<EnemyThrowSwordState>());
 
 		state_machine.set_entry("idle");
 	}
@@ -265,8 +265,10 @@ Enemy::~Enemy()
 
 void Enemy::on_update(float delta)
 {
-	if (velocity.x >= 0.0001f)
-		is_facing_left = (velocity.x < 0);
+	if (velocity.x > 0.0001f)
+		is_facing_left = false;
+	else if (velocity.x < -0.0001f)
+		is_facing_left = true;
 
 	Character::on_update(delta);
 
